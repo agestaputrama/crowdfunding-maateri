@@ -3,10 +3,10 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-//Dfine Route
+//Define Route
 const router = new Router({
     mode : 'history',
-    router: [
+    routes: [
         {
             path :'/',
             name : 'home',
@@ -16,8 +16,12 @@ const router = new Router({
         {
             path :'/donations',
             name : 'donations',
-            alias : '/home',
             component : () => import(/* webpackChunkName : "categories" */ './views/Donations.vue')
+        },
+        {
+            path :'/blogs',
+            name : 'blogs',
+            component : () => import(/* webpackChunkName : "categories" */ './views/Blogs.vue')
         },
         {
             path : '*',

@@ -19,4 +19,4 @@
 //     return 'masuk';
 // })->where('any', '.*');
 
-Route::view('/{any?}', 'app')->where('any', '.*');
+Route::view('/{any?}', 'app')->where('any', '.*'); 

@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'campaign',
+], function(){
+    Route::get('random/{count}', 'CampaignController@random');
+    Route::post('store', 'CampaignController@store');
 });
