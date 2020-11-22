@@ -1,23 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Campaign;
+use App\Blog;
 
 use Illuminate\Http\Request;
 
-class CampaignController extends Controller
+class BlogController extends Controller
 {
     public function random($count){
-        $campaigns = Campaign::select('*')
-            ->inRandomOrder()
-            ->limit($count)
-            ->get();
+        $blogs = Blog::select('*')
+                ->inRandomOrder()
+                ->limit($count)
+                ->get();
 
-        $data['campaigns'] = $campaigns;
+        $data['blogs'] = $blogs;
 
         return response()->json([
             'response_code' => '00',
-            'response_message' => 'data campaign berhasil ditampilkan',
+            'response_message' => 'data blogs berhasil ditampilkan',
             'data' => $data
         ], 200);
     }
@@ -29,25 +29,23 @@ class CampaignController extends Controller
             'image' => 'required|mimes:jpg,jpeg,png'
         ]);
 
-        $campaign = Campaign::create([
+        $blog = Blog::create([
             'title' => $request->title,
             'description' => $request->description,
         ]);
-
-        
 
         if ($request->hasFile('image')){
 
             $image = $request->file('image');
             $image_extension = $image->getClientOriginalExtension();
-            $image_name = $campaign->id . "." . $image_extension;
-            $image_folder = '/photos/campaign/';
+            $image_name = $blog->id . "." . $image_extension;
+            $image_folder = '/photos/blog/';
             $image_location = $image_folder . $image_name;
 
             try{
                 $image->move(public_path($image_folder), $image_name);
 
-                $campaign->update([
+                $blogs->update([
                     'image' => $image_location,
                 ]);
             } catch (\Exception $e){
@@ -59,37 +57,12 @@ class CampaignController extends Controller
             }
         }
 
-        $data['campaign'] = $campaign;
+        $data['blog'] = $blog;
 
         return response()->json([
             'response_code' => '00',
-            'response_message' => 'data campaigns berhasil ditambahkan',
+            'response_message' => 'data blogs berhasil ditambahkan',
             'data' => $data
         ], 200);
     }
-
-    public function index(){
-        $campaigns = Campaign::paginate(6);
-
-        $data['campaigns'] = $campaigns;
-
-        return response()->json([
-            'response_code' => '00',
-            'response_message' => 'data campaigns berhasil ditampilkan',
-            'data' => $data
-        ], 200);
-    }
-
-    public function detail($id){
-        $campaign = Campaign::find($id);
-
-        $data['campaign'] = $campaign;
-
-        return response()->json([
-            'response_code' => '00',
-            'response_message' => 'data campaign berhasil ditampilkan',
-            'data' => $data
-        ], 200);
-    }
-    
 }

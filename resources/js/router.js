@@ -24,6 +24,16 @@ const router = new Router({
             component : () => import(/* webpackChunkName : "categories" */ './views/Blogs.vue')
         },
         {
+            path :'/campaigns',
+            name : 'campaigns',
+            component : () => import(/* webpackChunkName : "categories" */ './views/Campaigns.vue')
+        },
+        {
+            path :'/campaign/:id',
+            name : 'campaign',
+            component : () => import('./views/Campaign.vue')
+        },
+        {
             path : '*',
             redirect : '/'
         }
