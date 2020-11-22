@@ -9,7 +9,7 @@
             </div>
             <v-layout wrap>
                 <v-flex v-for="(campaign, index) in campaigns" :key="`campaign-` +campaign.id" xs6>
-                    <v-card :to="'/campaign/' + campaign.id">
+                    <!-- <v-card :to="'/campaign/' + campaign.id">
                         <v-img
                             :src="campaign.image"
                             class="white--text"
@@ -19,11 +19,14 @@
                             v-text="campaign.title"
                         ></v-card-title>
                         </v-img>
-                    </v-card>
+                    </v-card> -->
+                    <campaign-item :campaign="campaign"></campaign-item>
                 </v-flex>
             </v-layout>
         </v-container>
         <!-- end template campaigns -->
+
+        <v-divider></v-divider>
 
         <!-- template blogs -->
         <v-container class="ma-0 pa-0" grid-list-sm>
@@ -53,7 +56,9 @@
 </template>
 
 <script>
+import CampaignItem from '../components/CampaignItem.vue'
     export default {
+  components: { CampaignItem },
         data: () => ({
             campaigns: [],
             blogs : [],
