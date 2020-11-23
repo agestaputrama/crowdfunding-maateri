@@ -67,7 +67,7 @@ export default {
             })
         },
         donate(){
-             this.$store.commit("increment")
+             this.$store.commit('insert')
         }
     }
 }
