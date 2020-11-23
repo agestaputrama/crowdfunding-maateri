@@ -1,5 +1,7 @@
 <template>
     <v-app>
+        <alert></alert>
+        <!-- side bar -->
         <v-navigation-drawer app v-model="drawer">
             <v-list>
                 <v-list-item v-if="!guest">
@@ -125,8 +127,13 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import Alert from './components/Alert.vue'
     export default {
+       components: { Alert },
        name: 'App',
+       components : {
+           Alert : () => import('./components/Alert')
+       },
        data: () => ({
            drawer: false,
            menus: [
@@ -142,6 +149,7 @@
            ...mapGetters({
                transactions : 'transaction/transactions' //nama modul dan nama getters
            }),
-       }
+       },
+
     }
 </script>
