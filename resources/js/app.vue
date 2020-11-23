@@ -61,7 +61,7 @@
             <v-btn icon>
                 <v-badge color="orange" overlap>
                     <template v-slot:badge>
-                        <span>3</span>
+                        <span>{{ $store.state.count }}</span>
                     </template>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
@@ -89,7 +89,7 @@
             <v-btn icon>
                 <v-badge color="orange" overlap>
                     <template v-slot:badge>
-                        <span>3</span>
+                        <span>{{ $store.state.count }}</span>
                     </template>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
