@@ -13,7 +13,7 @@ export default {
         },
     },
     actions: {
-        set: ({commit}, payload) => {
+        set: ({commit}, payload) => { 
             commit('set', payload)
         },
     },
