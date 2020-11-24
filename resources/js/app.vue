@@ -1,6 +1,11 @@
 <template>
     <v-app>
         <alert></alert>
+
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="scale-transition">
+            <search @closed="closeDialog"></search>
+        </v-dialog>
+
         <!-- side bar -->
         <v-navigation-drawer app v-model="drawer">
             <v-list>
@@ -78,6 +83,7 @@
             label="Search"
             prepend-inner-icon="mdi-magnify"
             solo-inverted
+            @click="dialog = !dialog"
             ></v-text-field>
         </v-app-bar>
 
@@ -127,12 +133,11 @@
 
 <script>
     import { mapGetters } from 'vuex'
-    import Alert from './components/Alert.vue'
-    export default {
-       components: { Alert },
+    export default { 
        name: 'App',
        components : {
-           Alert : () => import('./components/Alert')
+           Alert : () => import('./components/Alert'),
+           Search : () => import('./components/Search'),
        },
        data: () => ({
            drawer: false,
@@ -141,6 +146,7 @@
                { title: 'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns'},
            ],
            guest: false,
+           dialog: false,
        }),
        computed: {
            isHome() {
@@ -150,6 +156,11 @@
                transactions : 'transaction/transactions' //nama modul dan nama getters
            }),
        },
+       methods: {
+           closeDialog (value) {
+               this.dialog = value
+           }
+       }
 
     }
 </script>
