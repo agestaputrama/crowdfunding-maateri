@@ -21,3 +21,16 @@ Route::group([
     Route::get('random/{count}', 'BlogController@random');
     Route::post('store', 'BlogController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth',
+    'namespace' => 'Auth'
+], function(){
+    Route::post('register', 'RegisterController');
+    Route::post('verification', 'VerificationController');
+    Route::post('regenerate-otp', 'RegenerateController');
+    Route::post('update-password', 'UpdatepasswordController');
+    Route::post('login', 'LoginController');
+    Route::post('logout', 'LogoutController');
+});
