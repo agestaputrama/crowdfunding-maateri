@@ -222,7 +222,7 @@ var render = function() {
                     {
                       attrs: {
                         block: "",
-                        color: "primary",
+                        color: "orange",
                         disabled:
                           _vm.campaign.collected >= _vm.campaign.required
                       },

@@ -3607,7 +3607,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-btn",
-                        { attrs: { block: "", color: "success" } },
+                        { attrs: { block: "", color: "orange" } },
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
                             _vm._v("mdi-account")
@@ -3659,7 +3659,7 @@ var render = function() {
       _vm.isHome
         ? _c(
             "v-app-bar",
-            { attrs: { app: "", color: "success", dark: "" } },
+            { attrs: { app: "", color: "grey", dark: "" } },
             [
               _c("v-app-bar-nav-icon", {
                 on: {
@@ -3670,7 +3670,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("v-toolbar-title", [_vm._v("SanbercodeApp")]),
+              _c("v-toolbar-title", [_vm._v("DonasiKu")]),
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
@@ -3735,7 +3735,7 @@ var render = function() {
           )
         : _c(
             "v-app-bar",
-            { attrs: { app: "", color: "success", dark: "" } },
+            { attrs: { app: "", color: "grey", dark: "" } },
             [
               _c(
                 "v-btn",
@@ -3822,7 +3822,7 @@ var render = function() {
                     _vm._s(new Date().getFullYear()) +
                     " - "
                 ),
-                _c("strong", [_vm._v("SanbercodeApp")])
+                _c("strong", [_vm._v("DonasiKu")])
               ])
             ],
             1

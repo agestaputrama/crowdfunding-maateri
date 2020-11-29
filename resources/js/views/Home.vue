@@ -74,7 +74,7 @@ import CampaignItem from '../components/CampaignItem.vue'
                     console.log(responses)
                 })
 
-             axios.get('api/blog/random/2')
+             axios.get('api/blog/random/3')
                 .then((response) => {
                     let { data } = response.data
                     this.blogs = data.blogs

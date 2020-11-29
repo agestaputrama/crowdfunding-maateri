@@ -143,7 +143,7 @@ __webpack_require__.r(__webpack_exports__);
       var response = error.response;
       console.log(responses);
     });
-    axios.get('api/blog/random/2').then(function (response) {
+    axios.get('api/blog/random/3').then(function (response) {
       var data = response.data.data;
       _this.blogs = data.blogs;
     })["catch"](function (error) {

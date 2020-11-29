@@ -25,7 +25,7 @@
                         <v-icon left>mdi-lock</v-icon>
                         Login
                     </v-btn>
-                    <v-btn block color="success">
+                    <v-btn block color="orange">
                         <v-icon left>mdi-account</v-icon>
                         Register
                     </v-btn>
@@ -60,10 +60,10 @@
         </v-navigation-drawer>
     
         <!-- Header -->
-        <v-app-bar app color="success" dark v-if="isHome">
+        <v-app-bar app color="grey" dark v-if="isHome">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-            <v-toolbar-title>SanbercodeApp</v-toolbar-title>
+            <v-toolbar-title>DonasiKu</v-toolbar-title>
             
             <!-- Pemisah kontent -->
             <v-spacer></v-spacer>
@@ -89,7 +89,7 @@
             ></v-text-field>
         </v-app-bar>
 
-        <v-app-bar app color="success" dark v-else>
+        <v-app-bar app color="grey" dark v-else>
             <v-btn icon @click.stop="$router.go(-1)">
                 <v-icon>mdi-arrow-left-circle</v-icon>
             </v-btn>
@@ -126,7 +126,7 @@
         <v-card>
             <v-footer absolute app>
                 <v-card-text class="text-center">
-                    &copy; {{ new Date().getFullYear() }} - <strong>SanbercodeApp</strong>
+                    &copy; {{ new Date().getFullYear() }} - <strong>DonasiKu</strong>
                 </v-card-text>
             </v-footer>
         </v-card>

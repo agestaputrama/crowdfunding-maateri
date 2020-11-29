@@ -182,7 +182,7 @@ var render = function() {
     [
       _c(
         "v-toolbar",
-        { attrs: { dark: "", color: "success" } },
+        { attrs: { dark: "", color: "grey" } },
         [
           _c(
             "v-btn",
@@ -270,7 +270,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: {
-                        color: "success lighten-1",
+                        color: "primary lighten-1",
                         disabled: !_vm.valid
                       },
                       on: { click: _vm.submit }
@@ -287,7 +287,7 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { color: "primary lighten-1" },
+                      attrs: { color: "orange lighten-1" },
                       on: {
                         click: function($event) {
                           return _vm.authProvider("google")
