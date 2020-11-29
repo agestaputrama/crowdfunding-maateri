@@ -92,7 +92,7 @@ var render = function() {
     "v-snackbar",
     {
       attrs: {
-        color: "color",
+        color: _vm.color,
         bottom: "",
         timeout: "4000",
         "multi-line": "",

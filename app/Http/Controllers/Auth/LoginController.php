@@ -24,23 +24,19 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-        $user = User::where('email', request('email'))->first();
+        $credentials = $request->only(['email', 'password']);
 
-        if (!$token = auth()->attempt($request->only('email', 'password'))){
-            return response(null, 401);
-        
-        }else if ($user->email_verified_at == null){
-            return response()->json([
-                'response_code' => '00',
-                'response_message' => 'Silahkan verifikasi email'
-            ]);
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Email/Password tidak ditemukan'], 401);
         }
 
+        $data['token'] = $token;
+        $data['user'] = auth()->user();
+        
         return response()->json([
             'response_code' => '00',
             'response_message' => 'User Berhasil Login',
-            'token' => $token,
-            'user' => $user
+            'data' => $data
         ]);
     }
 }

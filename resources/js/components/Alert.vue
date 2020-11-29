@@ -1,7 +1,7 @@
 <template>
     <v-snackbar
         v-model="alert"
-        color="color"
+        :color="color"
         bottom
         timeout="4000"
         multi-line

@@ -32,5 +32,9 @@ Route::group([
     Route::post('regenerate-otp', 'RegenerateController');
     Route::post('update-password', 'UpdatepasswordController');
     Route::post('login', 'LoginController');
-    Route::post('logout', 'LogoutController');
+    Route::post('logout', 'LogoutController')->middleware('auth:api');
+    Route::post('check-token', 'CheckTokenController')->middleware('auth:api');
+
+    Route::get('/social/{provider}', 'SocialiteController@redirectToProvider');
+    Route::get('/social/{provider}/callback', 'SocialiteController@handleProviderCallback');
 });

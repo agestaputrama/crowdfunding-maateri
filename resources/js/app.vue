@@ -2,24 +2,26 @@
     <v-app>
         <alert></alert>
 
-        <v-dialog v-model="dialog" fullscreen hide-overlay transition="scale-transition">
-            <search @closed="closeDialog"></search>
-        </v-dialog>
+        <keep-alive>
+            <v-dialog v-model="dialog" fullscreen hide-overlay persistent transition="dialog-bottom-transition">
+                <component :is="currentComponent" @closed="setDialogStatus"></component>
+            </v-dialog>
+        </keep-alive>
 
         <!-- side bar -->
         <v-navigation-drawer app v-model="drawer">
             <v-list>
                 <v-list-item v-if="!guest">
                     <v-list-item-avatar>
-                        <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+                        <v-img :src="user.user.photo"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                        <v-list-item-title>John Leider</v-list-item-title>
+                        <v-list-item-title>{{ user.user.name }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
                 <div class="pa-2" v-if="guest">
-                    <v-btn block color="primary" class="mb-1">
+                    <v-btn block color="primary" class="mb-1" @click="setDialogComponent('login')">
                         <v-icon left>mdi-lock</v-icon>
                         Login
                     </v-btn>
@@ -48,7 +50,7 @@
 
             <template v-slot:append v-if="!guest">
                 <div class="pa-2">
-                    <v-btn block color="red" dark>
+                    <v-btn block color="red" dark @click="logout">
                         <v-icon left>mdi-lock</v-icon>
                         Logout
                     </v-btn>
@@ -83,7 +85,7 @@
             label="Search"
             prepend-inner-icon="mdi-magnify"
             solo-inverted
-            @click="dialog = !dialog"
+            @click="setDialogComponent('search')"
             ></v-text-field>
         </v-app-bar>
 
@@ -132,12 +134,13 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import { mapGetters, mapActions } from 'vuex'
     export default { 
        name: 'App',
        components : {
            Alert : () => import('./components/Alert'),
            Search : () => import('./components/Search'),
+           Login : () => import('./components/Login'),
        },
        data: () => ({
            drawer: false,
@@ -145,7 +148,6 @@
                { title: 'Home', icon: 'mdi-home', route: '/'},
                { title: 'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns'},
            ],
-           dialog: false,
        }),
        computed: {
            isHome() {
@@ -154,12 +156,56 @@
            ...mapGetters({
                transactions : 'transaction/transactions', //nama modul dan nama getters
                guest : 'auth/guest',
-               user : 'auth/user'
+               user : 'auth/user',
+               dialogStatus : 'dialog/status',
+               currentComponent : 'dialog/component'
            }),
+           dialog: {
+               get () {
+                   return this.dialogStatus
+               },
+               set (value) {
+                   this.setDialogStatus(value)
+               }
+           }
        },
        methods: {
-           closeDialog (value) {
-               this.dialog = value
+           ...mapActions({
+               setDialogStatus : 'dialog/setStatus',
+               setDialogComponent : 'dialog/setComponent',
+               setAuth : 'auth/set',
+               setAlert : 'alert/set',
+               checkToken : 'auth/checkToken',
+           }),
+           logout(){
+               let config = {
+                   headers: {
+                       'Authorization' : 'Bearer ' + this.user.token,
+                   },
+               }
+               axios.post('/api/auth/logout', {}, config)
+               .then((response) => {
+                   this.setAuth({}) //hilangkan auth ketika logout
+                   this.setAlert({
+                       status : true,
+                       color : 'success',
+                       text : 'Logout successfully'
+                   })
+               })
+               .catch((error) => {
+                   let {data} = error.response
+                   this.setAlert({
+                       status : true,
+                       color : 'error',
+                       text : data.message,
+                   })
+               })
+           }
+       },
+
+       mounted(){
+           if(this.user){
+               this.checkToken(this.user)
            }
        }
 
